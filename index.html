@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Early Learning Essentials</title>
+
+  <!-- Google Fonts: Nunito is warm, rounded, and highly readable for family-oriented brands -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =====================================================
+       CSS RESET & BASE STYLES
+       Removes browser default spacing and sets the base
+       font and colour for the whole page.
+    ===================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #FFFBF0; /* Warm cream background */
+      color: #3D3B30;            /* Warm dark brown for readable text */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;    /* Pushes footer to the bottom */
+    }
+
+    /* =====================================================
+       COLOUR VARIABLES
+       Defined here for easy tweaking later.
+    ===================================================== */
+    :root {
+      --yellow-light: #FFF3C4;   /* Soft pastel yellow for backgrounds */
+      --yellow-main:  #F9C74F;   /* Warm golden yellow for accents */
+      --green-light:  #D4EDDA;   /* Soft mint green for backgrounds */
+      --green-main:   #6BBF77;   /* Friendly mid-green for buttons */
+      --green-dark:   #4A9957;   /* Darker green for button hover */
+      --text-dark:    #3D3B30;   /* Warm near-black for body text */
+      --text-mid:     #6B6855;   /* Medium warm grey for secondary text */
+      --white:        #FFFFFF;
+    }
+
+    /* =====================================================
+       HEADER SECTION
+       Displays the business name and tagline. Uses a soft
+       yellow gradient to feel warm and inviting.
+    ===================================================== */
+    header {
+      background: linear-gradient(135deg, var(--yellow-light) 0%, #FFF8DC 100%);
+      border-bottom: 3px solid var(--yellow-main);
+      padding: 2rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+
+    /* Decorative leaf/sprout emoji used as a brand icon */
+    header .brand-icon {
+      font-size: 3rem;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    header h1 {
+      font-size: 2rem;       /* Mobile-first: smaller on phones */
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    /* The coloured word "Essentials" adds a visual highlight */
+    header h1 span {
+      color: var(--green-main);
+    }
+
+    header .tagline {
+      margin-top: 0.75rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-mid);
+    }
+
+    /* =====================================================
+       MAIN CONTENT AREA
+       Wraps all page content between header and footer.
+       flex: 1 makes it grow to fill available vertical space.
+    ===================================================== */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* =====================================================
+       COMING SOON CARD
+       A centred card containing the coming-soon message
+       and the email signup form.
+    ===================================================== */
+    .card {
+      background: var(--white);
+      border-radius: 1.25rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      padding: 2.5rem 2rem;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Friendly badge that sits above the heading */
+    .card .badge {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+    }
+
+    .card h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    /* =====================================================
+       COMING SOON PARAGRAPH
+       A short, warm explanation for visitors about what
+       Early Learning Essentials will offer.
+    ===================================================== */
+    .card .intro-text {
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .card .intro-text strong {
+      color: var(--text-dark);
+    }
+
+    /* =====================================================
+       EMAIL SIGNUP FORM
+       Lets visitors register their interest before launch.
+       Stacks vertically on mobile, then goes side-by-side
+       on wider screens via the media query below.
+    ===================================================== */
+    .signup-form {
+      display: flex;
+      flex-direction: column; /* Stack on mobile */
+      gap: 0.75rem;
+    }
+
+    .signup-form label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-align: left;
+    }
+
+    .signup-form input[type="email"] {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 2px solid #E8E4D0;
+      border-radius: 0.75rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      color: var(--text-dark);
+      background: #FAFAF5;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      outline: none;
+    }
+
+    /* Highlight border when the input is focused for accessibility */
+    .signup-form input[type="email"]:focus {
+      border-color: var(--green-main);
+      box-shadow: 0 0 0 3px rgba(107, 191, 119, 0.2);
+      background: var(--white);
+    }
+
+    .signup-form button {
+      width: 100%;
+      padding: 0.85rem 1.5rem;
+      background-color: var(--green-main);
+      color: var(--white);
+      border: none;
+      border-radius: 0.75rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    /* Slight colour change and lift effect on hover for a playful feel */
+    .signup-form button:hover {
+      background-color: var(--green-dark);
+      transform: translateY(-1px);
+    }
+
+    .signup-form button:active {
+      transform: translateY(0);
+    }
+
+    /* Small privacy reassurance below the form */
+    .signup-form .privacy-note {
+      font-size: 0.8rem;
+      color: var(--text-mid);
+      margin-top: 0.25rem;
+      text-align: center;
+    }
+
+    /* =====================================================
+       SUCCESS MESSAGE (hidden by default)
+       Shown via JavaScript when the form is submitted.
+    ===================================================== */
+    .success-message {
+      display: none;
+      background: var(--green-light);
+      border: 2px solid var(--green-main);
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem;
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    /* =====================================================
+       FEATURES STRIP
+       Three icon tiles below the signup form previewing
+       what the site will offer. Stacks vertically on mobile
+       and sits in a row on wider screens.
+    ===================================================== */
+
+    /* Divider line separating the form from the features */
+    .features-divider {
+      border: none;
+      border-top: 2px dashed #EDE8D0;
+      margin: 2rem 0 1.75rem;
+    }
+
+    .features-heading {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-mid);
+      margin-bottom: 1.25rem;
+    }
+
+    /* Flex container: column on mobile, row on wider screens */
+    .features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      list-style: none;
+    }
+
+    /* Each feature tile */
+    .features-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      background: #FAFAF5;
+      border: 1.5px solid #EDE8D0;
+      border-radius: 0.9rem;
+      padding: 1rem 1.1rem;
+      text-align: left;
+    }
+
+    /* Icon bubble — gives each emoji a coloured circular background */
+    .features-list .feat-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+      flex-shrink: 0;
+      width: 2.6rem;
+      height: 2.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--yellow-light);
+    }
+
+    /* Override bubble colour per feature for variety */
+    .features-list li:nth-child(2) .feat-icon {
+      background: var(--green-light);
+    }
+
+    .features-list li:nth-child(3) .feat-icon {
+      background: #E8F0FF; /* Soft blue for the disability tools tile */
+    }
+
+    .features-list .feat-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .features-list .feat-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .features-list .feat-desc {
+      font-size: 0.875rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    /* On wider screens, lay the three tiles side by side */
+    @media (min-width: 560px) {
+      .features-list {
+        flex-direction: row;
+      }
+
+      /* Each tile shares space equally */
+      .features-list li {
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    /* =====================================================
+       FOOTER SECTION
+       Simple, understated footer with location info and
+       copyright. Uses a warm yellow background to tie the
+       page together.
+    ===================================================== */
+    footer {
+      background: var(--yellow-light);
+      border-top: 2px solid #F0E5B0;
+      padding: 1.5rem 1.5rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.875rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    footer .location {
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    /* =====================================================
+       RESPONSIVE BREAKPOINT — TABLETS & DESKTOPS
+       At 480px and above, the email input and submit button
+       sit side by side to make better use of space.
+    ===================================================== */
+    @media (min-width: 480px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      .card {
+        padding: 3rem 2.5rem;
+      }
+
+      .card h2 {
+        font-size: 1.85rem;
+      }
+
+      /* Row layout: input grows, button stays fixed-width */
+      .signup-form .input-row {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .signup-form .input-row input[type="email"] {
+        flex: 1;
+      }
+
+      .signup-form .input-row button {
+        width: auto;
+        white-space: nowrap;
+      }
+    }
+
+    @media (min-width: 768px) {
+      header h1 {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       HEADER
+       Shows the brand name, a warm icon, and a tagline
+       that speaks directly to parents and educators.
+  ===================================================== -->
+  <header>
+    <span class="brand-icon" role="img" aria-label="seedling">🌱</span>
+    <h1>Early Learning <span>Essentials</span></h1>
+    <p class="tagline">Nurturing curious minds, one resource at a time.</p>
+  </header>
+
+  <!-- =====================================================
+       MAIN CONTENT
+       Contains the coming-soon card with a brief
+       description and the email signup form.
+  ===================================================== -->
+  <main>
+    <div class="card">
+
+      <!-- Badge label to quickly communicate page status -->
+      <span class="badge">Coming Soon</span>
+
+      <!-- Card heading -->
+      <h2>Something wonderful<br />is on its way!</h2>
+
+      <!-- =====================================================
+           COMING SOON PARAGRAPH
+           Explains what the site is and reassures visitors
+           that it's worth checking back or signing up.
+      ===================================================== -->
+      <p class="intro-text">
+        We're putting the finishing touches on something
+        <strong>made for parents and educators</strong> across Australia.
+        Early Learning Essentials will bring you quality resources,
+        tools, and products to support children in their most
+        important years of growth. <strong>Sign up below</strong>
+        to be the first to know when we launch!
+      </p>
+
+      <!-- =====================================================
+           EMAIL SIGNUP FORM
+           Collects visitor email addresses ahead of launch.
+           The "input-row" div becomes a flex row on wider
+           screens (see the @media query above).
+           Note: no back-end is connected yet — the form is
+           handled client-side with a success message for now.
+      ===================================================== -->
+      <form class="signup-form" id="signupForm" novalidate>
+        <label for="emailInput">Get notified at launch</label>
+        <div class="input-row">
+          <input
+            type="email"
+            id="emailInput"
+            name="email"
+            placeholder="you@example.com.au"
+            autocomplete="email"
+            required
+            aria-label="Your email address"
+          />
+          <button type="submit">Notify Me</button>
+        </div>
+        <p class="privacy-note">No spam, ever. Unsubscribe at any time.</p>
+      </form>
+
+      <!-- Success message shown after valid submission -->
+      <div class="success-message" id="successMessage" role="alert">
+        🎉 You're on the list! We'll be in touch soon.
+      </div>
+
+
+      <!-- =====================================================
+           FEATURES STRIP
+           Three tiles previewing what visitors can expect
+           when the site launches. Kept brief — one icon,
+           one title, one short line per feature.
+      ===================================================== -->
+      <hr class="features-divider" />
+      <p class="features-heading">What's coming</p>
+
+      <ul class="features-list">
+
+        <!-- Feature 1: physical early learning products -->
+        <li>
+          <span class="feat-icon" role="img" aria-label="shopping bag">🛍️</span>
+          <div class="feat-body">
+            <span class="feat-title">Early Learning Products</span>
+            <span class="feat-desc">Carefully chosen toys, books, and materials for little learners.</span>
+          </div>
+        </li>
+
+        <!-- Feature 2: educational resources for parents and educators -->
+        <li>
+          <span class="feat-icon" role="img" aria-label="open book">📖</span>
+          <div class="feat-body">
+            <span class="feat-title">Educational Resources</span>
+            <span class="feat-desc">Activities, guides, and printables to support everyday learning.</span>
+          </div>
+        </li>
+
+        <!-- Feature 3: specialist AAC tools for children with disabilities -->
+        <li>
+          <span class="feat-icon" role="img" aria-label="speech bubble with heart">💬</span>
+          <div class="feat-body">
+            <span class="feat-title">Specialist Communication Tools</span>
+            <span class="feat-desc">AAC tools designed to help every child find their voice.</span>
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </main>
+
+  <!-- =====================================================
+       FOOTER
+       Displays location info (Perth, WA) and a copyright
+       notice. Kept simple as this is a pre-launch page.
+  ===================================================== -->
+  <footer>
+    <p>
+      <span class="location">Perth, Western Australia</span><br />
+      &copy; 2026 Early Learning Essentials. All rights reserved.
+    </p>
+  </footer>
+
+  <!-- =====================================================
+       JAVASCRIPT — EMAIL FORM HANDLING
+       Validates the email field and shows a success message
+       on submission. In the future this can be connected to
+       a back-end service such as Mailchimp or ConvertKit.
+  ===================================================== -->
+  <script>
+    const form = document.getElementById('signupForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', function (event) {
+      // Prevent the default browser form submission (page reload)
+      event.preventDefault();
+
+      const emailInput = document.getElementById('emailInput');
+      const email = emailInput.value.trim();
+
+      // Basic check: ensure the field isn't empty
+      if (!email) {
+        emailInput.focus();
+        return;
+      }
+
+      // Hide the form and show the confirmation message
+      form.style.display = 'none';
+      successMessage.style.display = 'block';
+
+      // TODO: When a back-end is available, send the email address
+      // to a mailing list service here (e.g. via fetch/POST).
+    });
+  </script>
+
+</body>
+</html>
