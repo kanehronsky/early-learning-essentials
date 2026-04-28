@@ -8,7 +8,7 @@
   <!-- Google Fonts: Nunito is warm, rounded, and highly readable for family-oriented brands -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 
   <style>
     /* =====================================================
@@ -28,66 +28,51 @@
 
     body {
       font-family: 'Nunito', sans-serif;
-      background-color: #FFFBF0; /* Warm cream background */
-      color: #3D3B30;            /* Warm dark brown for readable text */
+      background-color: var(--warm-white);
+      color: var(--text-dark);
       min-height: 100vh;
       display: flex;
-      flex-direction: column;    /* Pushes footer to the bottom */
+      flex-direction: column; /* Pushes footer to the bottom */
     }
 
     /* =====================================================
        COLOUR VARIABLES
-       Defined here for easy tweaking later.
+       All colours extracted directly from the ELE logo:
+       navy from the ELE letterforms and lightbulb, sky blue
+       from the "Learning" text accent, and the four puzzle
+       piece colours as supporting accents.
     ===================================================== */
     :root {
-      --yellow-light: #FFF3C4;   /* Soft pastel yellow for backgrounds */
-      --yellow-main:  #F9C74F;   /* Warm golden yellow for accents */
-      --green-light:  #D4EDDA;   /* Soft mint green for backgrounds */
-      --green-main:   #6BBF77;   /* Friendly mid-green for buttons */
-      --green-dark:   #4A9957;   /* Darker green for button hover */
-      --text-dark:    #3D3B30;   /* Warm near-black for body text */
-      --text-mid:     #6B6855;   /* Medium warm grey for secondary text */
-      --white:        #FFFFFF;
+      --navy:        #1e3a4f;   /* Deep navy — footer BG, headings, strong borders */
+      --blue-accent: #3bbde8;   /* Sky blue — badge, button hover, focus rings */
+      --orange:      #f5a623;   /* Puzzle piece orange */
+      --pink:        #cc327a;   /* Puzzle piece pink/magenta */
+      --lime:        #8dc840;   /* Puzzle piece lime green */
+      --warm-white:  #f5f9fc;   /* Slightly blue-tinted white — body background */
+      --text-dark:   #1e3a4f;   /* Main headings and body text (matches navy) */
+      --text-mid:    #4a6e82;   /* Secondary / supporting text */
+      --white:       #ffffff;
     }
 
     /* =====================================================
        HEADER SECTION
-       Displays the business name and tagline. Uses a soft
-       yellow gradient to feel warm and inviting.
+       The logo image (white-background version) is centred
+       on a clean white header. The 4px navy border anchors
+       the header and carries the brand colour into the page.
     ===================================================== */
     header {
-      background: linear-gradient(135deg, var(--yellow-light) 0%, #FFF8DC 100%);
-      border-bottom: 3px solid var(--yellow-main);
-      padding: 2rem 1.5rem 2.5rem;
+      background: var(--white);
+      border-bottom: 4px solid var(--navy);
+      padding: 2rem 1.5rem;
       text-align: center;
     }
 
-    /* Decorative leaf/sprout emoji used as a brand icon */
-    header .brand-icon {
-      font-size: 3rem;
-      line-height: 1;
-      margin-bottom: 0.5rem;
+    /* Logo is responsive: scales down on mobile, prominent on desktop */
+    .header-logo {
+      width: min(300px, 85vw); /* Mobile-first: never overflows narrow screens */
+      height: auto;
       display: block;
-    }
-
-    header h1 {
-      font-size: 2rem;       /* Mobile-first: smaller on phones */
-      font-weight: 800;
-      color: var(--text-dark);
-      letter-spacing: -0.5px;
-      line-height: 1.2;
-    }
-
-    /* The coloured word "Essentials" adds a visual highlight */
-    header h1 span {
-      color: var(--green-main);
-    }
-
-    header .tagline {
-      margin-top: 0.75rem;
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--text-mid);
+      margin: 0 auto;
     }
 
     /* =====================================================
@@ -111,18 +96,19 @@
     .card {
       background: var(--white);
       border-radius: 1.25rem;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      /* Shadow uses navy tint instead of plain black for brand consistency */
+      box-shadow: 0 4px 24px rgba(30, 58, 79, 0.1);
       padding: 2.5rem 2rem;
       max-width: 520px;
       width: 100%;
       text-align: center;
     }
 
-    /* Friendly badge that sits above the heading */
+    /* Badge uses sky blue — the same accent colour as "Learning" in the logo */
     .card .badge {
       display: inline-block;
-      background: var(--green-light);
-      color: var(--green-dark);
+      background: var(--blue-accent);
+      color: var(--white);
       font-size: 0.8rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -135,15 +121,13 @@
     .card h2 {
       font-size: 1.6rem;
       font-weight: 800;
-      color: var(--text-dark);
+      color: var(--navy);
       line-height: 1.3;
       margin-bottom: 1rem;
     }
 
     /* =====================================================
        COMING SOON PARAGRAPH
-       A short, warm explanation for visitors about what
-       Early Learning Essentials will offer.
     ===================================================== */
     .card .intro-text {
       font-size: 1rem;
@@ -158,13 +142,12 @@
 
     /* =====================================================
        EMAIL SIGNUP FORM
-       Lets visitors register their interest before launch.
        Stacks vertically on mobile, then goes side-by-side
        on wider screens via the media query below.
     ===================================================== */
     .signup-form {
       display: flex;
-      flex-direction: column; /* Stack on mobile */
+      flex-direction: column;
       gap: 0.75rem;
     }
 
@@ -178,27 +161,28 @@
     .signup-form input[type="email"] {
       width: 100%;
       padding: 0.85rem 1rem;
-      border: 2px solid #E8E4D0;
+      border: 2px solid #c8dce8;
       border-radius: 0.75rem;
       font-family: 'Nunito', sans-serif;
       font-size: 1rem;
       color: var(--text-dark);
-      background: #FAFAF5;
+      background: var(--warm-white);
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
       outline: none;
     }
 
-    /* Highlight border when the input is focused for accessibility */
+    /* Sky blue focus ring matches the logo accent colour */
     .signup-form input[type="email"]:focus {
-      border-color: var(--green-main);
-      box-shadow: 0 0 0 3px rgba(107, 191, 119, 0.2);
+      border-color: var(--blue-accent);
+      box-shadow: 0 0 0 3px rgba(59, 189, 232, 0.2);
       background: var(--white);
     }
 
+    /* Navy button — bold and authoritative like the ELE letterforms */
     .signup-form button {
       width: 100%;
       padding: 0.85rem 1.5rem;
-      background-color: var(--green-main);
+      background-color: var(--navy);
       color: var(--white);
       border: none;
       border-radius: 0.75rem;
@@ -209,9 +193,9 @@
       transition: background-color 0.2s ease, transform 0.1s ease;
     }
 
-    /* Slight colour change and lift effect on hover for a playful feel */
+    /* Shifts to sky blue on hover for a playful brand-consistent lift */
     .signup-form button:hover {
-      background-color: var(--green-dark);
+      background-color: var(--blue-accent);
       transform: translateY(-1px);
     }
 
@@ -233,11 +217,11 @@
     ===================================================== */
     .success-message {
       display: none;
-      background: var(--green-light);
-      border: 2px solid var(--green-main);
+      background: #e8f7fd;
+      border: 2px solid var(--blue-accent);
       border-radius: 0.75rem;
       padding: 1rem 1.25rem;
-      color: var(--green-dark);
+      color: var(--navy);
       font-weight: 700;
       font-size: 1rem;
       margin-top: 0.5rem;
@@ -245,15 +229,15 @@
 
     /* =====================================================
        FEATURES STRIP
-       Three icon tiles below the signup form previewing
-       what the site will offer. Stacks vertically on mobile
-       and sits in a row on wider screens.
+       Three icon tiles previewing what the site will offer.
+       Each icon bubble uses a tinted version of one of the
+       logo's puzzle piece colours.
     ===================================================== */
 
-    /* Divider line separating the form from the features */
+    /* Navy-tinted dashed divider replaces the old warm yellow one */
     .features-divider {
       border: none;
-      border-top: 2px dashed #EDE8D0;
+      border-top: 2px dashed #c8dce8;
       margin: 2rem 0 1.75rem;
     }
 
@@ -279,14 +263,14 @@
       display: flex;
       align-items: flex-start;
       gap: 0.85rem;
-      background: #FAFAF5;
-      border: 1.5px solid #EDE8D0;
+      background: var(--warm-white);
+      border: 1.5px solid #c8dce8;
       border-radius: 0.9rem;
       padding: 1rem 1.1rem;
       text-align: left;
     }
 
-    /* Icon bubble — gives each emoji a coloured circular background */
+    /* Icon bubble — gives each emoji a tinted circular background */
     .features-list .feat-icon {
       font-size: 1.6rem;
       line-height: 1;
@@ -297,16 +281,17 @@
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      background: var(--yellow-light);
+      background: #fff3e0; /* Orange tint — puzzle piece orange */
     }
 
-    /* Override bubble colour per feature for variety */
+    /* Tile 2: lime green tint — puzzle piece lime */
     .features-list li:nth-child(2) .feat-icon {
-      background: var(--green-light);
+      background: #f2f9e4;
     }
 
+    /* Tile 3: sky blue tint — puzzle piece teal */
     .features-list li:nth-child(3) .feat-icon {
-      background: #E8F0FF; /* Soft blue for the disability tools tile */
+      background: #e0f5fc;
     }
 
     .features-list .feat-body {
@@ -318,7 +303,7 @@
     .features-list .feat-title {
       font-size: 0.95rem;
       font-weight: 700;
-      color: var(--text-dark);
+      color: var(--navy);
     }
 
     .features-list .feat-desc {
@@ -344,36 +329,42 @@
 
     /* =====================================================
        FOOTER SECTION
-       Simple, understated footer with location info and
-       copyright. Uses a warm yellow background to tie the
-       page together.
+       Deep navy background with the navy logo version.
+       The logo's navy background blends seamlessly into
+       the footer — no visible rectangle edge.
     ===================================================== */
     footer {
-      background: var(--yellow-light);
-      border-top: 2px solid #F0E5B0;
-      padding: 1.5rem 1.5rem;
+      background: var(--navy);
+      padding: 2rem 1.5rem;
       text-align: center;
+    }
+
+    /* Footer logo: smaller than header, still responsive */
+    .footer-logo {
+      width: min(240px, 70vw);
+      height: auto;
+      display: block;
+      margin: 0 auto 1rem;
     }
 
     footer p {
       font-size: 0.875rem;
-      color: var(--text-mid);
+      color: rgba(255, 255, 255, 0.6); /* Subdued white for copyright line */
       line-height: 1.6;
     }
 
     footer .location {
       font-weight: 700;
-      color: var(--text-dark);
+      color: var(--white); /* Full white for the location — slightly more prominent */
     }
 
     /* =====================================================
        RESPONSIVE BREAKPOINT — TABLETS & DESKTOPS
-       At 480px and above, the email input and submit button
-       sit side by side to make better use of space.
     ===================================================== */
     @media (min-width: 480px) {
-      header h1 {
-        font-size: 2.5rem;
+      /* Grow the header logo on wider screens */
+      .header-logo {
+        width: min(380px, 85vw);
       }
 
       .card {
@@ -401,8 +392,9 @@
     }
 
     @media (min-width: 768px) {
-      header h1 {
-        font-size: 3rem;
+      /* Full-size logo on desktop */
+      .header-logo {
+        width: 420px;
       }
     }
   </style>
@@ -412,13 +404,16 @@
 
   <!-- =====================================================
        HEADER
-       Shows the brand name, a warm icon, and a tagline
-       that speaks directly to parents and educators.
+       logo-white-details.png has a white background that
+       blends seamlessly into the white header — no border
+       or padding needed around the image itself.
   ===================================================== -->
   <header>
-    <span class="brand-icon" role="img" aria-label="seedling">🌱</span>
-    <h1>Early Learning <span>Essentials</span></h1>
-    <p class="tagline">Nurturing curious minds, one resource at a time.</p>
+    <img
+      src="images/logo-white-details.png"
+      alt="Early Learning Essentials — Educational Products For Early Learners"
+      class="header-logo"
+    />
   </header>
 
   <!-- =====================================================
@@ -479,12 +474,10 @@
         🎉 You're on the list! We'll be in touch soon.
       </div>
 
-
       <!-- =====================================================
            FEATURES STRIP
            Three tiles previewing what visitors can expect
-           when the site launches. Kept brief — one icon,
-           one title, one short line per feature.
+           when the site launches.
       ===================================================== -->
       <hr class="features-divider" />
       <p class="features-heading">What's coming</p>
@@ -525,10 +518,16 @@
 
   <!-- =====================================================
        FOOTER
-       Displays location info (Perth, WA) and a copyright
-       notice. Kept simple as this is a pre-launch page.
+       logo-navy-details.png has a matching navy background
+       that blends seamlessly into the footer — the logo
+       feels built-in rather than placed on top.
   ===================================================== -->
   <footer>
+    <img
+      src="images/logo-navy-details.png"
+      alt="Early Learning Essentials"
+      class="footer-logo"
+    />
     <p>
       <span class="location">Perth, Western Australia</span><br />
       &copy; 2026 Early Learning Essentials. All rights reserved.
